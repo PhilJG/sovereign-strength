@@ -16,7 +16,7 @@ const ExerciseForm = ({ onClose }) => {
   const [notes, setNotes] = useState('');
 
   // Handle form submission (log button click)
-  const handleSubmit = (event) => {
+  const handleSubmitExercise = (event) => {
     event.preventDefault();
     // Create a new exercise object with the form input values
     const exercise = {
@@ -32,6 +32,7 @@ const ExerciseForm = ({ onClose }) => {
     // Save the exercise to local storage
     const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
     exercises.push(exercise);
+    console.log(exercises)
     localStorage.setItem('exercises', JSON.stringify(exercises));
     // Close the form
     onClose();
@@ -44,7 +45,7 @@ const ExerciseForm = ({ onClose }) => {
 
     <div className="exercise-form bg-gray-800 text-white p-4 rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Log Exercise</h2>
-      <form onSubmit={handleSubmit} className='flex flex-col'>
+      <form onSubmit={handleSubmitExercise} className='flex flex-col'>
         <label>
           Exercise Name
         </label>
