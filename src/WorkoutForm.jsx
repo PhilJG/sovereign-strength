@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 const WorkoutForm = ({
+  workout,
+  setWorkout,
   exercises,
   setExercises,
   workoutDate,
@@ -24,9 +26,18 @@ const WorkoutForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("exercise.date:", workoutDate);
-    console.log("notes:", workoutNotes);
-    console.log("Body weight:", bodyWeight);
+
+    console.log("workout before:", workout);
+
+    setWorkout({
+      date: workoutDate,
+      bodyweight: bodyWeight,
+      notes: workoutNotes,
+      exercises: exercises,
+    });
+
+    console.log("workout after:", workout);
+
     console.log("Form submitted");
   };
 
@@ -78,15 +89,6 @@ const WorkoutForm = ({
         Add Exercise
       </button>
 
-      <ul>
-        {exercises.map((exercise, index) => (
-          <li key={index}>
-            <h2>{exercise.exerciseName}</h2>
-            <p>Weight: {exercise.weight}</p>
-          </li>
-        ))}
-      </ul>
-
       <div className="mb-4">
         <label
           htmlFor="workoutnotes"
@@ -110,6 +112,15 @@ const WorkoutForm = ({
       >
         Complete Workout
       </button>
+
+      <ul className="flex flex-col items-center justify-center">
+        {exercises.map((exercise, index) => (
+          <li key={index} className="flex bg-gray-200 p-2 m-2">
+            <h2>{exercise.exerciseName} </h2>
+            <p>: {exercise.exerciseWeight}</p>
+          </li>
+        ))}
+      </ul>
     </form>
   );
 };

@@ -5,6 +5,7 @@ import Modal from "./components/Modal";
 // Define the ExerciseForm component
 const ExerciseForm = ({
   onClose,
+  exercises,
   exerciseName,
   setExerciseName,
   exerciseWeight,
@@ -38,7 +39,7 @@ const ExerciseForm = ({
     };
 
     // Save the exercise to local storage
-    const exercises = JSON.parse(localStorage.getItem("exercises")) || [];
+    JSON.parse(localStorage.getItem("exercises")) || [];
     exercises.push(exercise);
     console.log(exercises);
     localStorage.setItem("exercises", JSON.stringify(exercises));

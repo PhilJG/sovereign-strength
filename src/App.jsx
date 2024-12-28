@@ -8,8 +8,12 @@ import ExerciseForm from "./ExerciseForm";
 import Modal from "./components/Modal";
 
 function App() {
-  const [exercises, setExercises] = useState([]);
+  const [exercises, setExercises] = useState(
+    JSON.parse(localStorage.getItem("exercises")) || []
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [workout, setWorkout] = useState({});
   const [workoutDate, setWorkoutDate] = useState("");
   const [bodyWeight, setBodyWeight] = useState("");
   const [workoutNotes, setWorkoutNotes] = useState("");
@@ -56,10 +60,13 @@ function App() {
           workoutNotes={workoutNotes}
           setWorkoutNotes={setWorkoutNotes}
           setIsModalOpen={setIsModalOpen}
+          workout={workout}
+          setWorkout={setWorkout}
         />
         {isModalOpen && (
           <Modal isOpen={true} onClose={handleCloseModal}>
             <ExerciseForm
+              exercises={exercises}
               onClose={handleCloseModal}
               exerciseName={exerciseName}
               setExerciseName={setExerciseName}
